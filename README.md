@@ -6,12 +6,34 @@ A Claude Code skill that pauses before executing a request to classify it — is
 
 It's **explicit-invocation only**: it does not intercept every message, only requests like "should this be an agent task", "analyze this before doing it", "/plan", "scope this out first".
 
-## Install (Claude Code)
+## Install
+
+### Claude Code (one-click via plugin marketplace)
 
 ```
 /plugin marketplace add YuY-QK/Intent-decomposition-skill
 /plugin install intent-decomposition@intent-decomposition-marketplace
 ```
+
+### Other SKILL.md-compatible tools (Codex CLI, Cursor, Windsurf, Gemini CLI, etc.)
+
+The plugin/marketplace mechanism above is Claude Code-specific, but the skill itself is a plain [Agent Skills](https://agentskills.io) `SKILL.md` file, which many tools read natively. Copy the `skills/intent-decomposition/` folder into wherever your tool looks for skills:
+
+```
+# Codex CLI
+cp -r skills/intent-decomposition .codex/skills/
+
+# Cursor
+cp -r skills/intent-decomposition .cursor/skills/
+
+# Windsurf
+cp -r skills/intent-decomposition .windsurf/skills/
+
+# Claude Code (manual, without the plugin system)
+cp -r skills/intent-decomposition ~/.claude/skills/
+```
+
+Check your tool's docs for its exact skills folder — the file itself needs no changes.
 
 Then invoke it in any conversation with a phrase like:
 
@@ -22,15 +44,20 @@ Then invoke it in any conversation with a phrase like:
 ```
 .
 ├── .claude-plugin/
-│   └── marketplace.json          # marketplace catalog (lists the plugin below)
-└── plugins/
+│   └── marketplace.json          # marketplace catalog (Claude Code plugin path)
+├── plugins/
+│   └── intent-decomposition/
+│       ├── .claude-plugin/
+│       │   └── plugin.json       # plugin manifest (Claude Code plugin path)
+│       └── skills/
+│           └── intent-decomposition/
+│               └── SKILL.md
+└── skills/
     └── intent-decomposition/
-        ├── .claude-plugin/
-        │   └── plugin.json       # plugin manifest
-        └── skills/
-            └── intent-decomposition/
-                └── SKILL.md       # the skill itself
+        └── SKILL.md               # plain copy for any SKILL.md-compatible tool
 ```
+
+The two `SKILL.md` files are identical — one is wrapped for the Claude Code plugin system, the other is a plain copy for tools that just expect a skills folder.
 
 ## Publishing checklist
 

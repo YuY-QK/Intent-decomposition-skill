@@ -6,12 +6,34 @@
 
 它是**仅在显式调用时触发**的：不会拦截每一条消息，只在类似"这应该是一个 agent 任务吗"、"先分析一下再执行"、"/plan"、"先评估一下范围"这样的请求下触发。
 
-## 安装（Claude Code）
+## 安装
+
+### Claude Code（通过插件市场一键安装）
 
 ```
 /plugin marketplace add YuY-QK/Intent-decomposition-skill
 /plugin install intent-decomposition@intent-decomposition-marketplace
 ```
+
+### 其他支持 SKILL.md 的工具（Codex CLI、Cursor、Windsurf、Gemini CLI 等）
+
+上面的插件/市场机制是 Claude Code 专属的，但这个技能本身是一个标准的 [Agent Skills](https://agentskills.io) `SKILL.md` 文件，许多工具都能原生读取。把 `skills/intent-decomposition/` 文件夹复制到你所用工具的技能目录即可：
+
+```
+# Codex CLI
+cp -r skills/intent-decomposition .codex/skills/
+
+# Cursor
+cp -r skills/intent-decomposition .cursor/skills/
+
+# Windsurf
+cp -r skills/intent-decomposition .windsurf/skills/
+
+# Claude Code（不使用插件系统，手动安装）
+cp -r skills/intent-decomposition ~/.claude/skills/
+```
+
+具体的技能目录路径请查阅你所用工具的文档——文件本身不需要做任何修改。
 
 安装后，在任意对话中用类似这样的话触发它：
 
@@ -22,15 +44,20 @@
 ```
 .
 ├── .claude-plugin/
-│   └── marketplace.json          # 市场目录（列出下面的插件）
-└── plugins/
+│   └── marketplace.json          # 市场目录（Claude Code 插件路径）
+├── plugins/
+│   └── intent-decomposition/
+│       ├── .claude-plugin/
+│       │   └── plugin.json       # 插件清单（Claude Code 插件路径）
+│       └── skills/
+│           └── intent-decomposition/
+│               └── SKILL.md
+└── skills/
     └── intent-decomposition/
-        ├── .claude-plugin/
-        │   └── plugin.json       # 插件清单
-        └── skills/
-            └── intent-decomposition/
-                └── SKILL.md       # 技能本体
+        └── SKILL.md               # 供任意支持 SKILL.md 的工具使用的纯净副本
 ```
+
+两份 `SKILL.md` 内容完全一致——一份包装成 Claude Code 插件所需的结构，另一份是给只需要一个技能文件夹的工具使用的纯净副本。
 
 ## 发布前检查清单
 
