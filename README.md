@@ -2,7 +2,7 @@
 
 # Intent Decomposition & Optimization
 
-A Claude Code skill that pauses before executing a request to classify it — is this a normal chat task, or does it need an agent / multi-step workflow? — and, when an agent is the right call, surfaces matching skills (Claude's own catalog first, then GitHub) instead of leaving you to build one from scratch.
+An Agent Skills skill for Claude Code and other compatible tools — is this a normal chat task, or does it need an agent / multi-step workflow? — and, when an agent is the right call, surfaces matching skills (Claude's own catalog first, then GitHub) instead of leaving you to build one from scratch.
 
 It's **explicit-invocation only**: it does not intercept every message, only requests like "should this be an agent task", "analyze this before doing it", "/plan", "scope this out first".
 
