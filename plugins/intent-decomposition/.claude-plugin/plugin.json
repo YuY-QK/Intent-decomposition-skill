@@ -1,0 +1,13 @@
+{
+  "name": "intent-decomposition",
+  "displayName": "Intent Decomposition & Optimization",
+  "description": "Before executing a request, analyzes whether it fits a normal chat interaction or needs an agent/multi-step workflow, then surfaces relevant skills (internal catalog first, then GitHub) when an agent is the right call.",
+  "version": "1.0.0",
+  "author": {
+    "name": "YuY-QK"
+  },
+  "homepage": "https://github.com/YuY-QK/Intent-decomposition-skill",
+  "repository": "https://github.com/YuY-QK/Intent-decomposition-skill",
+  "license": "MIT",
+  "keywords": ["planning", "agent", "routing", "skill-discovery", "task-decomposition"]
+}

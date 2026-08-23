@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "intent-decomposition-marketplace",
+  "owner": {
+    "name": "YuY-QK"
+  },
+  "description": "Marketplace for the Intent Decomposition & Optimization skill: classify a request as chat-suitable or agent-worthy before executing it, and surface relevant skills when an agent is the right call.",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "intent-decomposition",
+      "source": "./plugins/intent-decomposition",
+      "description": "Analyzes whether a request should be handled in normal chat or needs an agent workflow, then recommends matching skills.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "keywords": ["planning", "agent", "routing", "skill-discovery"]
+    }
+  ]
+}
